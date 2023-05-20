@@ -85,46 +85,6 @@ public class ProdutosDAO {
         }
         return retorno;
         
-    } public static ArrayList<Produtos> listar(){
-        ArrayList<Produtos> listaRetorno  = new ArrayList<>();
-        Connection conexao = null;
-        
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            String url = "jdbc:mysql://localhost:3306/iclothes";
-            conexao = DriverManager.getConnection(url, "root", "dede@2102");
-            
-            PreparedStatement comandoSQL = 
-            conexao.prepareStatement("SELECT * FROM cadastroproduto");
-            
-            ResultSet rs = comandoSQL.executeQuery();
-            
-            if(rs!=null){
-                while(rs.next()){
-                    Produtos obj = new Produtos();
-                    obj.setIdProduto(rs.getInt("idProduto"));
-                    obj.setPeca(rs.getString("peca"));
-                    obj.setCor(rs.getString("cor"));
-                    obj.setTamanho(rs.getString("tamanho"));
-                    obj.setPreco(rs.getDouble("preco"));
-                    obj.setQtd(rs.getInt("qtd"));
-                    
-                    listaRetorno.add(obj);
-                    
-                }
-            }
-            
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Erro ao carregar o Driver");
-        } catch (SQLException ex) {
-            System.out.println("Erro ao abrir a conexão");
-        }
-        
-        
-           return listaRetorno;
-       
     }
     
 }
