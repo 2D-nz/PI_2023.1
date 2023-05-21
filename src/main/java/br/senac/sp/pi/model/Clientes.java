@@ -14,19 +14,38 @@ public class Clientes {
     private String endereco;
     private String dataNascimento;
     private String bairro;
+    private String cidade;
     private String estado;
     private String estadoCivil;
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
     private String cep;
     private String email;
     private String telefone;
+    private String CPF;
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
 
     public String getGenero() {
         return genero;
     }
-
-    public Clientes(String genero, String nome, String endereco, String dataNascimento, String bairro, String estado, String estadoCivil, String cep, String email, String telefone) {
+    public Clientes(){}
+    public Clientes(String genero, String nome, String CPF, String endereco, String dataNascimento, String bairro, String cidade, String estado, String estadoCivil, String cep, String email, String telefone) {
         this.genero = genero;
         this.nome = nome;   
+        this.CPF = CPF;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
         this.bairro = bairro;
@@ -113,6 +132,8 @@ public class Clientes {
         this.telefone = telefone;
     }
  
-    
+    public String formatDn(String dn){
+       return dn.substring(6, 10) + "-" + dn.substring(3, 5) + "-" + dn.substring(0, 2);
+    }
     
 }
