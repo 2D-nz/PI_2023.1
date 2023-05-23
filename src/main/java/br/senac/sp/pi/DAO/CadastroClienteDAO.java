@@ -31,7 +31,7 @@ public class CadastroClienteDAO {
 
             conexao = DriverManager.getConnection(url, "root", "");
             PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO cadastroCliente "
-                    + "(nome, cpf, dataNascimento, estadoCivil, telefone, email, endereco, bairro, cidade, estado, cep, sexo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(nome, cpf, dataNascimento, estadoCivil, telefone, email, endereco, bairro, cidade, estado, cep, genero) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
             comandoSQL.setString(1, obj.getNome());
             comandoSQL.setString(2, obj.getCPF());
             comandoSQL.setString(3, obj.getDataNascimento());
@@ -81,7 +81,7 @@ public class CadastroClienteDAO {
                     cliente.setEmail(rs.getString("email"));
                     cliente.setTelefone(rs.getString("telefone"));
                     cliente.setCep(rs.getString("cep"));
-                    cliente.setGenero(rs.getString("sexo"));
+                    cliente.setGenero(rs.getString("genero"));
                     cliente.setEndereco(rs.getString("endereco"));
                     cliente.setCidade(rs.getString("cidade"));
                     cliente.setBairro(rs.getString("bairro"));
@@ -167,6 +167,45 @@ public class CadastroClienteDAO {
         }
 
         return retorno;
+    }
+    
+    public static ArrayList<Clientes> listarTodos() {
+        ArrayList<Clientes> listaRetorno = new ArrayList();
+        Connection conexao = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/iclothes";
+            conexao = DriverManager.getConnection(url, "root", "");
+
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * from cadastroCliente");
+            ResultSet rs = comandoSQL.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Clientes cliente = new Clientes();
+                    cliente.setCPF(rs.getString("cpf"));
+                    cliente.setDataNascimento(rs.getString("dataNascimento"));
+                    cliente.setNome(rs.getString("nome"));
+                    cliente.setEmail(rs.getString("email"));
+                    cliente.setTelefone(rs.getString("telefone"));
+                    cliente.setCep(rs.getString("cep"));
+                    cliente.setGenero(rs.getString("genero"));
+                    cliente.setEndereco(rs.getString("endereco"));
+                    cliente.setCidade(rs.getString("cidade"));
+                    cliente.setBairro(rs.getString("bairro"));
+                    cliente.setEstado(rs.getString("estado"));
+                    cliente.setEstadoCivil(rs.getString("estadoCivil"));
+
+                    listaRetorno.add(cliente);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro ao carregar o Driver");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao abrir a conexão");
+        }
+        return listaRetorno;
     }
 
 }
