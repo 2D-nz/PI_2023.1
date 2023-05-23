@@ -135,5 +135,49 @@ public class ProdutosDAO {
  
         
         return retorno;
-}
+}       
+    public static boolean alterar(Produtos obj){
+         
+        boolean retorno = false;
+        Connection conexao = null;
+        
+        try {
+            //Receita de bolo JDBC
+            //Passo 1 - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //Passo 2 - Abrir conexão
+            //"jdbc:mysql//localhost:3306/basenotafiscal", "root", "")
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/iclothes", "root", "dede@2102");
+            
+            //Passo 3 - Criar comando SQL
+            PreparedStatement comando = conexao.
+                    prepareStatement("UPDATE cadastroproduto SET peca=?, cor=?, tamanho=?, preco=?, qtd=? WHERE idProduto=?");
+            
+            //Passo 4 - Executar comando SQL
+            comando.setString(1, obj.getPeca());
+            comando.setString(2, obj.getCor());
+            comando.setString(3, obj.getTamanho());
+            comando.setDouble(4, obj.getPreco());
+            comando.setInt(5, obj.getQtd());
+            comando.setInt(6, obj.getIdProduto());
+            
+            int linhasAfetadas = comando.executeUpdate();
+            
+            if(linhasAfetadas>0){
+                retorno = true;
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro ao carregar o driver");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao conectar com o banco");
+        }
+        
+        
+        return retorno;
+         
+     }
+    
+    
 }
