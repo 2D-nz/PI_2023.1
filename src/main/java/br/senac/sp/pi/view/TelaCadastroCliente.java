@@ -427,12 +427,11 @@ public class TelaCadastroCliente extends javax.swing.JFrame {
                 if (retorno) {
                     JOptionPane.showMessageDialog(rootPane, "Sucesso!");
                     JOptionPane.showMessageDialog(null, "Dados enviados para o banco de dados");
-                   // WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-                   // Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+                    WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+                    Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Falha");
-                    System.out.println(obj.toString());
-                    System.out.println("oi");
+                    
                 }
 
             } else {

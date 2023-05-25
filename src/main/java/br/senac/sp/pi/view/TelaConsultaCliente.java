@@ -205,16 +205,18 @@ public class TelaConsultaCliente extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int colunaSelecionada = jTable1.getSelectedColumn();
-        String cpf = inputCPF.getText();
-        cpf = cpf.replace(".", "");
-        cpf = cpf.replace("-", "");
+        int cpfSelecionado = jTable1.getSelectedRow();
+        Object CPF1 = jTable1.getValueAt(cpfSelecionado, 0);
+        String CPF = String.valueOf(CPF1);
+        System.out.println(jTable1.getValueAt(cpfSelecionado, colunaSelecionada));
+    
         String colunaNome = jTable1.getColumnName(colunaSelecionada).toLowerCase();
         String resultado = JOptionPane.showInputDialog("Atualizar para qual valor?");
         System.out.println(resultado);
-        System.out.println(cpf);
+        System.out.println(CPF);
         System.out.println(colunaNome);
         
-        CadastroClienteDAO.alterar(cpf, colunaNome, resultado);
+        CadastroClienteDAO.alterar(CPF, colunaNome, resultado);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
 
