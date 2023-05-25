@@ -54,6 +54,7 @@ public class Clientes {
         this.cep = cep;
         this.email = email;
         this.telefone = telefone;
+        this.cidade = cidade;
     }
 
     public void setGenero(String genero) {
