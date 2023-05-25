@@ -118,11 +118,8 @@ public class CadastroClienteDAO {
 
             comando.setString(1, CPF);
 
-            int linhasAfetadas = comando.executeUpdate();
 
-            if (linhasAfetadas > 0) {
                 retorno = true;
-            }
 
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao carregar o driver");
